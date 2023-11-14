@@ -7,6 +7,7 @@ class InputDownloader
     private ?string $cookie;
 
     const BASE_URL = 'https://adventofcode.com/2023';
+
     public function __construct(string $cookie)
     {
         $this->cookie = $cookie;
