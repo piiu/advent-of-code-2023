@@ -12,21 +12,19 @@ class Day02 extends Solver
         foreach (explode(PHP_EOL, $this->input) as $line) {
             [$game, $setList] = explode(': ', $line);
             $gameNumber = (int)ltrim($game, 'Game ');
-            $sets = [];
-            $gamePossible = true;
-            foreach (explode('; ', $setList) as $rawSet) {
+            $sets = array_map(function($rawSet) {
                 $set = [];
                 foreach (explode(', ', $rawSet) as $cubeDef) {
                     [$number, $color] = explode(' ', $cubeDef);
                     $set[$color] = (int)$number;
                 }
-                if (($set['red'] ?? 0) > 12 || ($set['green'] ?? 0) > 13 || ($set['blue'] ?? 0) > 14) {
-                    $gamePossible = false;
-                }
-                $sets[] = $set;
-            }
+                return $set;
+            }, explode('; ', $setList));
 
-            if ($gamePossible) {
+            if (max(array_column($sets, 'red')) <= 12
+                && max(array_column($sets, 'green')) <= 13
+                && max(array_column($sets, 'blue')) <= 14
+            ) {
                 $this->part1 += $gameNumber;
             }
 
