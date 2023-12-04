@@ -17,6 +17,7 @@ class Day01 extends Solver
         'eight' => 8,
         'nine' => 9
     ];
+
     public function solve()
     {
         $this->part1 = $this->part2 = 0;
