@@ -9,6 +9,8 @@ use AdventOfCode\Common\Solver;
 class Day03 extends Solver
 {
     const SPACE = '.';
+    const GEAR = '*';
+
     public function solve()
     {
         $map = new Map($this->input);
@@ -50,12 +52,8 @@ class Day03 extends Solver
         $gears = [];
         foreach ($numbers as $number) {
             foreach ($number['nextToSymbols'] as $symbol) {
-                if ($symbol[0] === '*') {
-                    if (empty($gears[$symbol])) {
-                        $gears[$symbol] = [$number['number']];
-                    } else {
-                        $gears[$symbol][] = $number['number'];
-                    }
+                if ($symbol[0] === self::GEAR) {
+                    $gears[$symbol][] = $number['number'];
                 }
             }
         }
