@@ -7,7 +7,7 @@ use AdventOfCode\Common\Config;
 use AdventOfCode\Common\InputDownloader;
 use AdventOfCode\Common\Solver;
 
-require 'vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 try {
     $options = getopt("d:");
