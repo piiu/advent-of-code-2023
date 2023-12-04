@@ -11,8 +11,8 @@ class Day04 extends Solver
     public function solve()
     {
         foreach (explode(PHP_EOL, $this->input) as $line) {
-            preg_match('/Card\s*(\w*):\s*((\w*\s*)*)\|(\s*(\w*\s*)*)/', $line, $result);
-            $this->cards[$result[1]] = count(array_intersect(preg_split('/\s+/', trim($result[2])), preg_split('/\s+/', trim($result[4]))));
+            preg_match('/Card\s+(\w+):\s+((?:\s*\w+)+)\s+\|\s+((?:\s*\w+)+)/', $line, $result);
+            $this->cards[$result[1]] = count(array_intersect(preg_split('/\s+/', $result[2]), preg_split('/\s+/', $result[3])));
         }
 
         $this->part1 = array_sum(array_map(function($matches) {
