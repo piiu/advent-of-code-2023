@@ -15,14 +15,17 @@ class Day04 extends Solver
             $this->cards[$result[1]] = count(array_intersect(preg_split('/\s+/', $result[2]), preg_split('/\s+/', $result[3])));
         }
 
-        $this->part1 = array_sum(array_map(function($matches) {
-            return $matches === 0 ? 0 : pow(2, $matches - 1);
-        }, $this->cards));
-
+        $this->part1 = array_sum(array_map([$this, 'getPoints'], $this->cards));
         $this->part2 = array_sum(array_map([$this, 'getCardsReceived'], array_keys($this->cards)));
     }
 
-    private function getCardsReceived($number, $count = 0) {
+    private function getPoints(int $matches): int
+    {
+        return $matches === 0 ? 0 : pow(2, $matches - 1);
+    }
+
+    private function getCardsReceived($number, $count = 0): int
+    {
         if ($this->cards[$number] > 0) {
             foreach (range($number + 1, $number + $this->cards[$number]) as $receivedCard) {
                 $count += $this->getCardsReceived($receivedCard);
