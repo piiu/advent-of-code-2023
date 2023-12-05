@@ -10,3 +10,6 @@
 
 ### Run
 `composer day [number]`
+
+### Issues
+`Day 5 part 2 does not work with example input, just my input`
