@@ -6,12 +6,6 @@ use AdventOfCode\Common\Solver;
 
 class Day06 extends Solver
 {
-    /*
-     * x * (t-x) = d
-     * -x^2 + t -d = 0
-     * x = (-t +- sqrt(t^2 - 4 * d)) / -2
-     */
-
     public function solve()
     {
         [$times, $distances] = array_map(function($line) {
@@ -19,12 +13,15 @@ class Day06 extends Solver
             return $matches[0];
         }, explode(PHP_EOL, $this->input));
 
-        $this->part1 = array_product(array_map(function ($time, $distance) {
-            return $this->solveForTimeAndDistance($time, $distance);
-        }, $times, $distances));
+        $this->part1 = array_product(array_map([$this, 'solveForTimeAndDistance'], $times, $distances));
         $this->part2 = $this->solveForTimeAndDistance(join('', $times), join('', $distances));
     }
 
+    /*
+     * x * (t-x) = d
+     * -x^2 + t -d = 0
+     * x = (-t +- sqrt(t^2 - 4 * d)) / -2
+     */
     private function solveForTimeAndDistance($time, $distance): int
     {
         $sqrt = sqrt(pow($time, 2) - (4 * $distance));
